@@ -176,3 +176,43 @@ INPUT_STYLE_BLANK = {
         "font_weight": "500",
     },
 }
+
+deepDark = "#1b1a21"
+mediumDark = "#1a1340"
+dark = "#1f306e"
+medium = "#553772"
+light = "#8f3b76"
+mediumLight = "#c7417b"
+highLight = "#f0dae1"
+
+BASE_STYLE = {
+    "::selection": {
+        "background_color": medium,
+    },
+    ".some-css-class": {
+        "text_decoration": "underline",
+    },
+    "#special-input": {"width": "20vw"},
+    rx.Text: {
+        "font_family": SANS,
+    },
+    rx.Divider: {
+        "margin_bottom": "1em",
+        "margin_top": "0.5em",
+    },
+    rx.Heading: {
+        "font_weight": "500",
+    },
+    rx.Code: {
+        "color": medium,
+    },
+    rx.Button: {
+        "bg": light,
+    },
+    rx.Box: {
+        "bg": mediumDark,
+    },
+    rx.Menu: {"bg": deepDark},
+    rx.Text: {"color": "white"},
+    rx.Input: {"color": "White"},
+}

@@ -1,14 +1,107 @@
 import reflex as rx
+from cmtWeb.styles import styles
+from reflex import Component, Text
+
+
+class PropExampleStateTest(rx.State):
+    borderColorOver: str = "black"
+
+    def on_mouse_over(self):
+        print("mouse over")
+        self.borderColorOver = styles.light
+
+    def on_mouse_out(self):
+        self.borderColorOver = "black"
 
 
 def tabSection() -> rx.Component:
-    # button nav bar
+    iconButton = rx.image(
+        src="logoMMA.png",
+        width="188px",
+        height="80px",
+        colorScheme="teal",
+        size="lg"
+        # 2,32 x
+    )
 
-    button = rx.button("About", bg="blue", border_radius="0.5em", width="15%")
-    button1 = rx.button("About", bg="blue", border_radius="0.5em", width="15%")
-    button2 = rx.button("About", bg="blue", border_radius="0.5em", width="15%")
-    button3 = rx.button("About", bg="blue", border_radius="0.5em", width="15%")
-    button4 = rx.button("About", bg="blue", border_radius="0.5em", width="15%")
-    flex = rx.flex(rx.spacer(), button, button1, button2, button3, button4, rx.spacer())
+    buttonAttr = {
+        "width": "10%",
+        "minWidth": "60px",
+        "color": "white",
+        "fontWeight": "extrabold",
+        "style": {
+            "borderTop": "4px",
+            "borderColor": "black",
+            "_hover": {"borderColor": "#FF0080"},
+        },
+    }
 
-    return flex
+    menu = rx.menu(
+        rx.menu_button("About", **buttonAttr),
+        rx.menu_button(
+            "Services",
+            **buttonAttr,
+            # on_click=lambda x: PropExampleState.focus_me("test"),
+        ),
+        # rx.menu_button("Home", width="10%", minWidth="60px", color="white"),
+        iconButton,
+        rx.menu_button(
+            "Works",
+            **buttonAttr,
+        ),
+        rx.menu_button(
+            "Contact",
+            **buttonAttr,
+        ),
+    )
+    # PropExampleState.reference = menu
+
+    return rx.flex(
+        rx.spacer(),
+        menu,
+        rx.spacer(),
+        # bg="linear-gradient(90deg, rgba(20,13,56,1) 0%, rgba(40,42,47,1) 50%, rgba(20,13,56,1) 100%)",
+        bg="rgb(27, 26, 33)",
+        width="100%",
+        minHeight="59px",
+        top="0px",
+        position="fixed",
+        z_index="10",
+    )
+
+
+# def sidebar() -> rx.Component:
+#     return rx.box(
+#         rx.vstack(
+#             rx.image(src="/favicon.ico", margin="0 auto"),
+#             rx.heading(
+#                 "Sidebar",
+#                 text_align="center",
+#                 margin_bottom="1em",
+#             ),
+#             rx.menu(
+#                 rx.menu_button("About", width="10%", minWidth="60px", color="white"),
+#                 rx.menu_button("Services", width="10%", minWidth="60px", color="white"),
+#                 rx.menu_button("Home", width="10%", minWidth="60px", color="white"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Works", width="10%", minWidth="60px", color="black"),
+#                 rx.menu_button("Contact", width="10%", minWidth="60px", color="white"),
+#             ),
+#             width="250px",
+#             padding_x="2em",
+#             padding_y="1em",
+#         ),
+#         position="fixed",
+#         height="100%",
+#         left="0px",
+#         top="0px",
+#         z_index="500",
+#     )
