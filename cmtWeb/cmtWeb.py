@@ -4,7 +4,7 @@ from rxconfig import config
 import reflex as rx
 from cmtWeb.styles import styles
 from cmtWeb.pages.mainTab import tabSection
-from cmtWeb.pages.about import aboutSection
+from cmtWeb.pages.about import section as aboutSection
 from cmtWeb.pages.home import homeSection
 from cmtWeb.pages.works import worksSection
 from cmtWeb.pages.services import servicesSection
@@ -32,7 +32,20 @@ def index() -> rx.Component:
     )
 
 
+# def index() -> rx.Component:
+#     return rx.box(
+#         rx.button_group(
+#             rx.button("Example", bg="lightblue", color="black", size="sm"),
+#             rx.button("Example", bg="orange", color="white", size="md"),
+#             rx.button("Example", color_scheme="red", size="lg"),
+#         )
+#     )
+
+
 # Add state and page to the app.
 app = rx.App(style=styles.BASE_STYLE)
+# app = rx.App()
+
+
 app.add_page(index)
 app.compile()

@@ -183,11 +183,14 @@ dark = "#1f306e"
 medium = "#553772"
 light = "#8f3b76"
 mediumLight = "#c7417b"
-highLight = "#f0dae1"
+highLight = "#FF0080"
 
 BASE_STYLE = {
     "::selection": {
         "background_color": medium,
+    },
+    "::hover": {
+        "background_color": "red",
     },
     ".some-css-class": {
         "text_decoration": "underline",
@@ -207,7 +210,14 @@ BASE_STYLE = {
         "color": medium,
     },
     rx.Button: {
-        "bg": light,
+        "color": "white",
+        "background-color": highLight,
+        "text-align": "center",
+        "text-decoration": "none",
+        "display": "inline-block",
+        "font-size": "16px",
+        # "margin": "2px 2px",
+        "cursor": "pointer",
     },
     rx.Box: {
         "bg": mediumDark,
@@ -215,4 +225,10 @@ BASE_STYLE = {
     rx.Menu: {"bg": deepDark},
     rx.Text: {"color": "white"},
     rx.Input: {"color": "White"},
+    rx.Heading: {
+        "color": "white",
+    },
+    # rx.Card.on_mouse_enter: {
+    #     "background-color": "red",
+    # },
 }

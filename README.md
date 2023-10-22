@@ -29,3 +29,7 @@ Resources Needed
 # https://www.youtube.com/watch?v=btVOnySkEuo
 
 # Tutorial chakra https://www.youtube.com/watch?v=QbLTBTfZ1Hk&list=PL4cUxeGkcC9hcnIeryurNMMcGBHp7AYlP&index=5
+
+
+
+# animacion css https://www.youtube.com/watch?v=ZzHZTBwc32s
