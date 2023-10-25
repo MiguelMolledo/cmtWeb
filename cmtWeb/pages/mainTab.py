@@ -3,17 +3,6 @@ from cmtWeb.styles import styles
 from reflex import Component, Text
 
 
-class PropExampleStateTest(rx.State):
-    borderColorOver: str = "black"
-
-    def on_mouse_over(self):
-        print("mouse over")
-        self.borderColorOver = styles.light
-
-    def on_mouse_out(self):
-        self.borderColorOver = "black"
-
-
 def tabSection() -> rx.Component:
     iconButton = rx.image(
         src="logoMMA.png",
@@ -31,8 +20,8 @@ def tabSection() -> rx.Component:
         "fontWeight": "extrabold",
         "style": {
             "borderTop": "4px",
-            "borderColor": "black",
-            "_hover": {"borderColor": "#FF0080"},
+            "borderColor": "transparent",
+            "_hover": {"borderColor": styles.highLight},
         },
     }
 
@@ -61,7 +50,9 @@ def tabSection() -> rx.Component:
         menu,
         rx.spacer(),
         # bg="linear-gradient(90deg, rgba(20,13,56,1) 0%, rgba(40,42,47,1) 50%, rgba(20,13,56,1) 100%)",
-        bg="rgb(27, 26, 33)",
+        # bg="rgb(27, 26, 33)",
+        # bg="#FF0080",
+        bg="rgb(27, 26, 33, 0.8)",
         width="100%",
         minHeight="59px",
         top="0px",

@@ -5,7 +5,7 @@ from .colors import colors as c
 from .fonts import font_weights as fw
 
 # General styles.
-SANS = "Instrument Sans"
+SANS = "Georgia, serif"
 MONO = "IBM Plex Mono, Menlo, Consolas, DejaVu Sans Mono, monospace"
 BOLD_WEIGHT = fw["bold"]
 NAVBAR_LOGO = "/Reflex.svg"
@@ -188,9 +188,6 @@ highLight = "#FF0080"
 BASE_STYLE = {
     "::selection": {
         "background_color": medium,
-    },
-    "::hover": {
-        "background_color": "red",
     },
     ".some-css-class": {
         "text_decoration": "underline",

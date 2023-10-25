@@ -18,15 +18,11 @@ def exampleBox(color: str, width: str) -> rx.Component:
 def index() -> rx.Component:
     return rx.box(
         rx.vstack(
-            tabSection(),
-            rx.spacer(
-                minHeight="59px",
-            ),
+            # tabSection(),
             homeSection(),
             aboutSection(),
             servicesSection(),
             worksSection(),
-            contactSection(),
         ),
         minHeight="100vh",
     )
@@ -48,4 +44,7 @@ app = rx.App(style=styles.BASE_STYLE)
 
 
 app.add_page(index)
+# app.add_page(
+#     contactSection(),
+# )
 app.compile()

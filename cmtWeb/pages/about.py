@@ -13,7 +13,7 @@ highLightedText = {
 }
 
 highLightedTextMedium = copy.deepcopy(highLightedText)
-highLightedTextMedium["fontSize"] = ["0.5em", "0.5em", "0.5em", "2xl", "2xl"]
+highLightedTextMedium["fontSize"] = ["1x1", "1x1", "1xl.5", "1xl.5", "2xl"]
 
 
 def customField(field: str, value: str) -> rx.Component:
@@ -22,11 +22,12 @@ def customField(field: str, value: str) -> rx.Component:
     textStyle.pop("bgGradient")
     textStyle["color"] = "#FF0080"
 
-    return rx.hstack(
+    return rx.container(
         rx.text(f"{field}: ", **textStyle),
-        rx.text(f"{value}", font_size=["0.5em", "0.5em", "0.5em", "1em", "1em"]),
-        align="left",
-        width="100%",
+        rx.text(f"{value}", font_size=["1em", "1em", "1em", "1em", "1em"]),
+        # align="center",
+        width=["auto", "100%", "100%", "100%", "100%"],
+        gap="4",
     )
 
 
@@ -45,12 +46,12 @@ def activitiesSection() -> rx.Component:
         # rx.spacer(min_height="32px"),
         # rx.divider(),
         rx.spacer(rx.divider(border_color=styles.highLight)),
-        buttonIcon("3d.png"),
-        buttonIcon("btc.png"),
-        buttonIcon("dog.png"),
-        buttonIcon("music.png"),
-        buttonIcon("paint.png"),
-        buttonIcon("plane.png"),
+        rx.tooltip(buttonIcon("3d.png"), label="3D Animation!"),
+        rx.tooltip(buttonIcon("btc.png"), label="BlockChain!"),
+        rx.tooltip(buttonIcon("dog.png"), label="Animals!"),
+        rx.tooltip(buttonIcon("music.png"), label="Play Guitar!"),
+        rx.tooltip(buttonIcon("paint.png"), label="Paint Miniatures!"),
+        rx.tooltip(buttonIcon("plane.png"), label="Travel along the world!"),
         rx.spacer(rx.divider(border_color=styles.highLight)),
         # rx.divider(),
         # rx.spacer(min_height="32px"),
@@ -69,7 +70,7 @@ def imageSection() -> rx.Component:
             # height="auto",
             # height=["450px", "750px", "1125px", "1125px", "1125px"],
             height="auto",
-            max_width=["100px", "250px", "400px", "400px", "450px"],
+            max_width=["250px", "250px", "400px", "400px", "450px"],
             # max_width="450px",
             style={
                 "box-shadow": "60px -16px #FF0080",
@@ -77,8 +78,15 @@ def imageSection() -> rx.Component:
         ),
         rx.spacer(min_height="16px"),
         rx.button(
-            "Download Resume", min_width=["100px", "150px", "250px", "350px", "450px"]
+            rx.icon(tag="download"),
+            "Download Resume",
+            min_width=["100px", "150px", "250px", "350px", "450px"],
+            on_click=rx.download(
+                url="/Cv.png",
+                filename="CvMiguelMolledo.png",
+            ),
         ),
+        rx.spacer(min_height="16px"),
         direction="column",
         align="center",
     )
@@ -87,7 +95,11 @@ def imageSection() -> rx.Component:
 def aboutDescriptionSection() -> rx.Component:
     return rx.flex(
         rx.text("ABOUT ME", **highLightedText),
-        rx.text(DESCRIPTION_TEST, font_size=["8px", "8px", "8px", "1em", "1.5em"]),
+        rx.text(
+            DESCRIPTION_TEST,
+            font_size=["1em", "1em", "1em", "1em", "1.5em"],
+            max_width="500px",
+        ),
         customField("NAME", "Miguel Molledo"),
         customField("DATE OF BIRTH", "26 September 1993"),
         customField("NATIONALITY", "Spain"),
@@ -95,25 +107,29 @@ def aboutDescriptionSection() -> rx.Component:
         customField("PHONE", "+34 606 11 76 80"),
         customField("E-MAIL", "info@miguelmolledo.com"),
         direction="column",
-        align="left",
+        align="center",
         gap=["2", "2", "2", "8", "8"],
     )
 
 
 def aboutSection() -> rx.Component:
     return rx.flex(
-        rx.spacer(min_height="100px"),
+        # rx.spacer(min_height="100px"),
         rx.flex(
-            rx.spacer(),
+            rx.spacer(max_width=["1%", "1%", "1%", "10%", "10%"]),
             imageSection(),
             aboutDescriptionSection(),
-            rx.spacer(),
+            rx.spacer(max_width=["1%", "1%", "1%", "10%", "10%"]),
             align="center",
-            gap="120",
-            direction="row",
+            gap="40",
+            direction=["column", "column", "row", "row", "row"],
             style={"align-items": "stretch"},
+            min_width=["1%", "1%", "5%", "10%", "10%"],
         ),
-        rx.spacer(min_height="100px"),
+        # rx.spacer(
+        #     min_height="100px",
+        #     min_width=["1%", "1%", "5%", "10%", "10%"],
+        # ),
         direction="column",
     )
 
@@ -122,15 +138,22 @@ def section() -> rx.Component:
     # button nav bar
 
     return rx.flex(
-        rx.spacer(min_height=["20px", "20px", "20px", "50px", "100px"]),
+        # rx.spacer(
+        #     min_height=["20px", "20px", "20px", "50px", "100px"],
+        #     min_width=["1%", "1%", "5%", "10%", "10%"],
+        # ),
+        rx.spacer(min_height=["20px", "20px", "20px", "20px", "20px"]),
         aboutSection(),
-        rx.spacer(min_height=["20px", "20px", "20px", "50px", "100px"]),
+        # rx.spacer(min_height=["20px", "20px", "20px", "50px", "100px"]),
         rx.flex(
             rx.spacer(max_width="10%"), rx.heading("MY INTERESTS", **highLightedText)
         ),
         activitiesSection(),
-        rx.spacer(min_height=["20px", "20px", "20px", "50px", "100px"]),
+        # rx.spacer(min_height=["20px", "20px", "20px", "50px", "100px"]),
+        min_width=["1%", "1%", "5%", "10%" "10%"],
         direction="column",
-        gap="4",
+        width="100%",
+        gap=["20px", "20px", "20px", "50px", "100px"],
         min_height=["40vh", "40vh", "60vh", "80vh", "100vh"],
+        bg="#1b1a21",
     )
