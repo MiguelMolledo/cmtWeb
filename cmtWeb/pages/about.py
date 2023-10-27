@@ -22,12 +22,14 @@ def customField(field: str, value: str) -> rx.Component:
     textStyle.pop("bgGradient")
     textStyle["color"] = "#FF0080"
 
-    return rx.container(
+    return rx.flex(
         rx.text(f"{field}: ", **textStyle),
         rx.text(f"{value}", font_size=["1em", "1em", "1em", "1em", "1em"]),
+        rx.spacer(),
         # align="center",
-        width=["auto", "100%", "100%", "100%", "100%"],
-        gap="4",
+        width=["100%", "100%", "100%", "100%", "100%"],
+        align="stretch",
+        gap="2",
     )
 
 
@@ -66,9 +68,6 @@ def imageSection() -> rx.Component:
         rx.image(
             src="profile.jpg",
             size="md",
-            # width="100%",
-            # height="auto",
-            # height=["450px", "750px", "1125px", "1125px", "1125px"],
             height="auto",
             max_width=["250px", "250px", "400px", "400px", "450px"],
             # max_width="450px",
@@ -95,17 +94,30 @@ def imageSection() -> rx.Component:
 def aboutDescriptionSection() -> rx.Component:
     return rx.flex(
         rx.text("ABOUT ME", **highLightedText),
-        rx.text(
-            DESCRIPTION_TEST,
-            font_size=["1em", "1em", "1em", "1em", "1.5em"],
-            max_width="500px",
+        rx.flex(
+            rx.spacer(),
+            rx.text(
+                DESCRIPTION_TEST,
+                font_size=["1em", "1em", "1em", "1em", "1.5em"],
+                max_width="500px",
+                width="100%",
+            ),
+            rx.spacer(),
+            width="100%",
         ),
-        customField("NAME", "Miguel Molledo"),
-        customField("DATE OF BIRTH", "26 September 1993"),
-        customField("NATIONALITY", "Spain"),
-        customField("ADDRESS", "Madrid, Spain, 28016 Maestro lassalle 22"),
-        customField("PHONE", "+34 606 11 76 80"),
-        customField("E-MAIL", "info@miguelmolledo.com"),
+        rx.flex(
+            rx.spacer(max_width=["0px", "0px", "0px", "0px", "0px"]),
+            rx.vstack(
+                customField("NAME", "Miguel Molledo"),
+                customField("DATE OF BIRTH", "26 September 1993"),
+                customField("NATIONALITY", "Spain"),
+                customField("ADDRESS", "Madrid, Spain, 28016 Maestro lassalle 22"),
+                customField("PHONE", "+34 606 11 76 80"),
+                customField("E-MAIL", "info@miguelmolledo.com"),
+                width="100%",
+            ),
+            rx.spacer(max_width=["0px", "0px", "0px", "0px", "0px"]),
+        ),
         direction="column",
         align="center",
         gap=["2", "2", "2", "8", "8"],
@@ -116,12 +128,18 @@ def aboutSection() -> rx.Component:
     return rx.flex(
         # rx.spacer(min_height="100px"),
         rx.flex(
-            rx.spacer(max_width=["1%", "1%", "1%", "10%", "10%"]),
+            rx.spacer(
+                max_width=["0", "0", "0", "10%", "10%"],
+                max_height=["0", "0", "0", "10%", "10%"],
+            ),
             imageSection(),
             aboutDescriptionSection(),
-            rx.spacer(max_width=["1%", "1%", "1%", "10%", "10%"]),
+            rx.spacer(
+                max_width=["0", "0", "0", "10%", "10%"],
+                max_height=["0", "0", "0", "10%", "10%"],
+            ),
             align="center",
-            gap="40",
+            gap="20",
             direction=["column", "column", "row", "row", "row"],
             style={"align-items": "stretch"},
             min_width=["1%", "1%", "5%", "10%", "10%"],
@@ -154,6 +172,6 @@ def section() -> rx.Component:
         direction="column",
         width="100%",
         gap=["20px", "20px", "20px", "50px", "100px"],
-        min_height=["40vh", "40vh", "60vh", "80vh", "100vh"],
+        minHeight=["40vh", "60vh", "80vh", "100vh", "100vh"],
         bg="#1b1a21",
     )

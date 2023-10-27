@@ -80,7 +80,7 @@ def createCard(header: str, description: str, footer: str):
 def workGridItem() -> rx.Component:
     return rx.flex(
         rx.flex(
-            rx.input(value=State.filterWorks),
+            rx.input(value=State.filterWorks, border_color=styles.highLight),
             rx.icon(tag="search"),
         ),
         createCardsByDict(),

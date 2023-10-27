@@ -1,7 +1,8 @@
 import reflex as rx
+from cmtWeb.pages.mainTab import tabSection
 
 
-def contactSection() -> rx.Component:
+def contactForm() -> rx.Component:
     return rx.flex(
         rx.vstack(
             rx.text("Contact Us", fontSize="20px"),
@@ -40,4 +41,14 @@ def contactSection() -> rx.Component:
         width="100%",
         align="center",
         justify="center",
+    )
+
+
+def contactSection() -> rx.Component:
+    return rx.flex(
+        tabSection(),
+        rx.spacer(height="50px", maxHeight="100  px"),
+        contactForm(),
+        minHeight="100vh",
+        direction="column",
     )

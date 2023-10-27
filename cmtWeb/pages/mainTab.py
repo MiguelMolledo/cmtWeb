@@ -6,8 +6,8 @@ from reflex import Component, Text
 def tabSection() -> rx.Component:
     iconButton = rx.image(
         src="logoMMA.png",
-        width="188px",
-        height="80px",
+        width="auto",
+        height=["40px", "40px", "80px", "80px", "80px"],
         colorScheme="teal",
         size="lg"
         # 2,32 x
@@ -17,6 +17,7 @@ def tabSection() -> rx.Component:
         "width": "10%",
         "minWidth": "60px",
         "color": "white",
+        "fontSize": ["10px", "13px", "16px", "2xl", "2xl"],
         "fontWeight": "extrabold",
         "style": {
             "borderTop": "4px",
@@ -33,13 +34,16 @@ def tabSection() -> rx.Component:
             # on_click=lambda x: PropExampleState.focus_me("test"),
         ),
         # rx.menu_button("Home", width="10%", minWidth="60px", color="white"),
-        iconButton,
+        rx.flex(rx.spacer(), iconButton, rx.spacer(), direction="column"),
         rx.menu_button(
             "Works",
             **buttonAttr,
         ),
         rx.menu_button(
-            "Contact",
+            rx.link(
+                "Contact",
+                href="/contact",
+            ),
             **buttonAttr,
         ),
     )

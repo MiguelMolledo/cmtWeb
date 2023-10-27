@@ -44,7 +44,8 @@ app = rx.App(style=styles.BASE_STYLE)
 
 
 app.add_page(index)
-# app.add_page(
-#     contactSection(),
-# )
+app.add_page(
+    component=contactSection,
+    route="/contact",
+)
 app.compile()

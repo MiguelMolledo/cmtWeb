@@ -32,12 +32,6 @@ class State(rx.State):
 
     serviceInfo: list[dict] = [
         {
-            "header": "3D Pipeline",
-            "footer": "Provide 3D/VFX/Tracking Tools",
-            "description": "",
-            "image": "PipeSoftwares.png",
-        },
-        {
             "header": "BlockChain",
             "footer": "SmartContracts, NFTs, DEFI, AUDIT",
             "description": "",
@@ -60,6 +54,12 @@ class State(rx.State):
             "footer": "Provide 3D/VFX/Tracking Tools",
             "description": "",
             "image": "consulting.png",
+        },
+        {
+            "header": "3D Pipeline",
+            "footer": "Provide 3D/VFX/Tracking Tools",
+            "description": "",
+            "image": "PipeSoftwares.png",
         },
     ]
 
