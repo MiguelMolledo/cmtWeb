@@ -8,6 +8,7 @@
 ## FAQ
 from cmtWeb.styles import styles
 from cmtWeb.pages.mainTab import tabSection
+from cmtWeb.mainState import State
 
 import reflex as rx
 
@@ -80,6 +81,11 @@ def presentationSection() -> rx.Component:
                 direction="row",
                 gap="10",
             ),
+            rx.flex(
+                rx.spacer(),
+                rx.button("Hire me!", on_click=State.goToContact),
+                rx.spacer(),
+            ),
             direction="column",
         ),
         rx.spacer(),
@@ -105,27 +111,4 @@ def homeSection() -> rx.Component:
         backgroundRepeat="no-repeat",
         bgSize="cover",
         direction="column",
-        style={
-            # "backdrop-filter": "blur(5px)",
-            # "-webkit-backdrop-filter": "blur(5px)",
-            # "filter": "blur(8px)",
-            # "-webkit-filter": "blur(8px)",
-        }
-        # style={"filter": "blur(3px)"}
-        # bg="linear-gradient(90deg, rgba(27,26,33,1) 31%, rgba(51,11,75,1) 68%)",
-        # background-image: url("./images/forest.jpg") !important;
     )
-
-
-# def navbar() -> rx.Component:
-#     return rx.box(
-#         rx.hstack(
-#             rx.image(src="favicon.ico"),
-#             rx.heading("My App"),
-#         ),
-#         rx.spacer(),
-#         rx.text("DO you want to work with the best developer in the world?"),
-#         width="40%",
-#         z_index="5",
-#         bg="linear-gradient(11deg, rgba(27,26,33,0.3) 0%, rgba(143,59,118,0.5) 95%);",
-#     )

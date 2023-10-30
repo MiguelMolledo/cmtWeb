@@ -9,6 +9,7 @@ from cmtWeb.pages.home import homeSection
 from cmtWeb.pages.works import worksSection
 from cmtWeb.pages.services import servicesSection
 from cmtWeb.pages.contact import contactSection
+from cmtWeb.mainState import State
 
 
 def exampleBox(color: str, width: str) -> rx.Component:
@@ -16,6 +17,7 @@ def exampleBox(color: str, width: str) -> rx.Component:
 
 
 def index() -> rx.Component:
+    # return contactSection()
     return rx.box(
         rx.vstack(
             # tabSection(),
@@ -28,24 +30,11 @@ def index() -> rx.Component:
     )
 
 
-# def index() -> rx.Component:
-#     return rx.box(
-#         rx.button_group(
-#             rx.button("Example", bg="lightblue", color="black", size="sm"),
-#             rx.button("Example", bg="orange", color="white", size="md"),
-#             rx.button("Example", color_scheme="red", size="lg"),
-#         )
-#     )
-
-
 # Add state and page to the app.
-app = rx.App(style=styles.BASE_STYLE)
+app = rx.App(style=styles.BASE_STYLE, state=State)
 # app = rx.App()
 
 
 app.add_page(index)
-app.add_page(
-    component=contactSection,
-    route="/contact",
-)
+# app.add_page(contactSection)
 app.compile()

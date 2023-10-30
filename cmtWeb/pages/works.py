@@ -40,7 +40,11 @@ def createCardsByDict() -> rx.Component:
                 State.filteredWorkData,
                 # lambda item: rx.text(item["header"]),
                 lambda item: createCard(
-                    item["header"], item["description"], item["footer"]
+                    item["header"],
+                    item["description"],
+                    item["footer"],
+                    item["link"],
+                    item["wip"],
                 ),
             ),
             columns=[[2], [2], [3], [3], [3]],
@@ -67,27 +71,46 @@ def createCardsByDict() -> rx.Component:
     )
 
 
-def createCard(header: str, description: str, footer: str):
+def createCard(header: str, description: str, footer: str, link: str, wip: bool):
     body = rx.cond(
         description.contains(".png"),
-        rx.image(
-            src=description,
-            width="100%",
-            style={
-                # "::-webkit-mask-image": "-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))",
-                # "::mask-image": "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))"
-                "color": "transparent"
-            },
+        rx.link(
+            rx.image(
+                src=description,
+                width="100%",
+                style={
+                    # "::-webkit-mask-image": "-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))",
+                    # "::mask-image": "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))"
+                    "color": "transparent",
+                    "_hover": {
+                        "borderColor": styles.highLight,
+                        "box-shadow": "0px 20px 40px #black",
+                        "transform": "scale(1.10)",
+                    },
+                },
+            ),
+            href=link,
+            is_external=True,
         ),
         rx.text(description),
     )
 
-    return rx.card(
-        body,
-        header=rx.heading(header, size="lg"),
-        footer=rx.heading(footer, size="sm"),
-        opacity="0.9",
-        **cardStyle,
+    return rx.cond(
+        wip,
+        rx.card(
+            body,
+            header=rx.heading(header, size="lg"),
+            footer=rx.heading(footer, size="sm"),
+            filter="blur(4px)",
+            **cardStyle,
+        ),
+        rx.card(
+            body,
+            header=rx.heading(header, size="lg"),
+            footer=rx.heading(footer, size="sm"),
+            opacity="0.9",
+            **cardStyle,
+        ),
     )
 
 
@@ -104,12 +127,14 @@ def workGridItem() -> rx.Component:
                 value=State.filterWorksExpression,
                 border_color=styles.highLight,
                 on_change=State.inputWorkFilter,
+                debounce_timeout=500,
             ),
             gap="2",
             justify="center",
         ),
         createCardsByDict(),
         direction="column",
+        justify="center",
         gap="10",
         width="100%",
         max_height=["500px", "500px", "650px", "850px", "1000px"],
@@ -135,7 +160,8 @@ def worksSection() -> rx.Component:
         titleSection(),
         workGridItem(),
         direction="column",
-        gap="40",
+        gap="2",
         min_height=["40vh", "40vh", "60vh", "80vh", "100vh"],
-        wdith="100%",
+        width="100%",
+        bg=styles.deepDark,
     )

@@ -5,18 +5,12 @@ contact info Web using Reflex for python
 
 ## TODO:
 
-1. Create main TAb options   about - Services - HOME - works - Contact 
-2. Create Sammo Designer 
-3. 
-
-
-Resources Needed 
-1. Background Image
-2. Logo image
-3. Big Logo Image 
-
-
-
+1. focus when clicking on main buttons
+2. Be able to redirect page rx.redirect
+3. Display a front window when Clicking on 
+4. Improve contact info page
+   1. Edit box 
+   2. Or maybe change the format of the page 
 
 ### Useful links
 

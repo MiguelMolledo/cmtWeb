@@ -1,5 +1,5 @@
 import reflex as rx
-from cmtWeb.pages.ConfigText import DESCRIPTION_TEST
+from cmtWeb.mainState import State
 from ..styles import styles
 import copy
 
@@ -38,8 +38,8 @@ def buttonIcon(icon: str) -> rx.Component:
         rx.image(src=icon, height="auto", maxWidth="auto"),
         style={"border-radius": "30%"},
         variant="solid",
-        width=["32px", "32px", "64px", "64px", "124px"],
-        height=["32px", "32px", "64px", "64px", "124px"],
+        width=["64px", "64px", "64px", "64px", "124px"],
+        height=["64px", "64px", "64px", "64px", "124px"],
     )
 
 
@@ -98,7 +98,7 @@ def aboutDescriptionSection() -> rx.Component:
         rx.flex(
             rx.spacer(),
             rx.text(
-                DESCRIPTION_TEST,
+                State.aboutDescription,
                 font_size=["1em", "1em", "1em", "1em", "1.5em"],
                 max_width="500px",
                 width="100%",
