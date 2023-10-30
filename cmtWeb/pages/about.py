@@ -60,6 +60,7 @@ def activitiesSection() -> rx.Component:
         alignItems="center",
         direction="row",
         gap="4",
+        justify="center",
     )
 
 

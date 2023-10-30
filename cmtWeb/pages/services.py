@@ -4,7 +4,7 @@ from cmtWeb.mainState import State
 
 cardStyle = {
     "bg": "linear-gradient(360deg, rgba(255,0,128,0.7203256302521008) 2%, rgba(27,26,33,0.4066001400560224) 5%, rgba(27,26,33,0.3841911764705882) 95%, rgba(255,0,128,0.7203256302521008) 100%)",
-    "min_width": ["100px", "150px", "200px", "200px", "250px"],
+    "min_width": ["150px", "200px", "200px", "200px", "250px"],
     "color": "white",
 }
 highLightedText = {
@@ -39,7 +39,11 @@ def createCardButton(header: str, footer: str, image: str):
                 # min_weight=["100px", "150px", "200px", "200px", "250px"],
             ),
             header=rx.heading(header, size="auto"),
-            footer=rx.text(footer, fontSize=["8px", "xs", "sm", "md", "md"]),
+            footer=rx.text(
+                footer,
+                fontSize=["8px", "8px", "sm", "md", "md"],
+                max_width=["100px", "150px", "200px", "200px", "250px"],
+            ),
             **cardStyle,
         ),
         height="auto",

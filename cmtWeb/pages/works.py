@@ -12,8 +12,8 @@ highLightedText = {
 }
 cardStyle = {
     "bg": "linear-gradient(360deg, rgba(255,0,128,0.7203256302521008) 2%, rgba(27,26,33,0.4066001400560224) 5%, rgba(27,26,33,0.3841911764705882) 95%, rgba(255,0,128,0.7203256302521008) 100%)",
-    "width": ["100px", "150px", "200px", "250px", "250px"],
-    "height": ["100px", "150px", "200px", "250px", "250px"],
+    "max_width": ["100px", "150px", "200px", "250px", "250px"],
+    # "height": ["100px", "150px", "200px", "250px", "250px"],
     "color": "white",
 }
 
@@ -28,60 +28,85 @@ cardStyle = {
 # ]
 
 rx.stat_arrow
+#  img {
+#   -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+#   mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
 
 
 def createCardsByDict() -> rx.Component:
     return rx.flex(
         rx.responsive_grid(
             rx.foreach(
-                State.testCards,
+                State.filteredWorkData,
                 # lambda item: rx.text(item["header"]),
                 lambda item: createCard(
                     item["header"], item["description"], item["footer"]
                 ),
             ),
-            columns=[3],
+            columns=[[2], [2], [3], [3], [3]],
             spacing="4",
             color="white",
         ),
         style={
             "overflow": "auto",
             "::-webkit-scrollbar": {"display": "none"},
-            "::-webkit-scrollbar": {"width": "20px"},
+            "::-webkit-scrollbar": {"width": "10px"},
             "::-webkit-scrollbar-track": {
                 "box-shadow": "inset 0 0 5px grey",
-                "border-radius": "10px",
+                "border-radius": "5px",
             },
             "::-webkit-scrollbar-thumb": {
                 "background": styles.highLight,
-                "border-radius": "10px",
+                "border-radius": "5px",
             },
             " ::-webkit-scrollbar-thumb:hover": {
                 "background": styles.medium,
             },
         },
+        id="test1",
     )
 
 
 def createCard(header: str, description: str, footer: str):
-    test = lambda item: State.filterWorkCards(item)
-    return rx.cond(
-        State.testFilterWorks,
-        rx.card(
-            rx.text(description),
-            header=rx.heading(header, size="lg"),
-            footer=rx.heading(footer, size="sm"),
-            **cardStyle,
+    body = rx.cond(
+        description.contains(".png"),
+        rx.image(
+            src=description,
+            width="100%",
+            style={
+                # "::-webkit-mask-image": "-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)))",
+                # "::mask-image": "linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))"
+                "color": "transparent"
+            },
         ),
-        rx.text("Text 2", color="red"),
+        rx.text(description),
+    )
+
+    return rx.card(
+        body,
+        header=rx.heading(header, size="lg"),
+        footer=rx.heading(footer, size="sm"),
+        opacity="0.9",
+        **cardStyle,
     )
 
 
 def workGridItem() -> rx.Component:
     return rx.flex(
         rx.flex(
-            rx.input(value=State.filterWorks, border_color=styles.highLight),
-            rx.icon(tag="search"),
+            rx.icon(
+                tag="search",
+                color="white",
+                height="auto",
+                width=["16px", "32px", "32px", "32px", "32px"],
+            ),
+            rx.input(
+                value=State.filterWorksExpression,
+                border_color=styles.highLight,
+                on_change=State.inputWorkFilter,
+            ),
+            gap="2",
+            justify="center",
         ),
         createCardsByDict(),
         direction="column",

@@ -1,36 +1,83 @@
 import reflex as rx
+from typing import Dict, List
 
 
 class State(rx.State):
-    testCards: list[dict] = [
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
-        {"header": "header1", "footer": "footer1", "description": "body1"},
+    workData: List[Dict[str, str]] = [
+        {
+            "header": "Tmnt Film tools",
+            "footer": "Pipeline 3D",
+            "description": "tmnt.png",
+            "link": "https://youtu.be/IHvzw4Ibuho?si=rNoGiMSW1eu0onng",
+        },
+        {
+            "header": "SpellBound Film tools",
+            "footer": "Pipeline 3D",
+            "description": "skydance.png",
+            "link": "https://www.skydance.com/",
+        },
+        {
+            "header": "Mummies Film Tools",
+            "footer": "Pipeline 3D/Backend",
+            "description": "mummies.png",
+            "link": "https://www.youtube.com/watch?v=WRB8YIc4U68",
+        },
+        {
+            "header": "Blue & Malone",
+            "footer": "Pipeline 3D",
+            "description": "bluemalone.png",
+            "link": "https://www.youtube.com/watch?v=2PKYobvej8M",
+        },
+        {
+            "header": "WonderPark",
+            "footer": "Pipeline 3D",
+            "description": "wonderpark.png",
+            "link": "https://youtu.be/vYm7mYd0SgE?si=2H2l8ereiXSLwI4l",
+        },
+        {
+            "header": "Illusorium",
+            "footer": "Pipeline 3D",
+            "description": "wonderpark.png",
+            "link": "Illusorium.png",
+        },
+        {
+            "header": "SimpleCloud",
+            "footer": "Pipeline 3D/Backend",
+            "description": "simpleCloud.png",
+            "link": "https://www.simplecloud.io/",
+        },
+        {
+            "header": "Sanity Checks",
+            "footer": "Pipeline 3D",
+            "description": "checkList.png",
+        },
+        {
+            "header": "Blue & Malone",
+            "footer": "Pipeline 3D",
+            "description": "bluemalone.png",
+            "link": "https://www.youtube.com/watch?v=2PKYobvej8M",
+        },
+        {"header": "CriticalMinds Business", "footer": "Web", "description": "wip.png"},
+        {"header": "Samoytek Solutions", "footer": "Web", "description": "wip.png"},
+        {"header": "Podcast Medjugoria", "footer": "web", "description": "wip.png"},
+        {
+            "header": "NFTs Platform",
+            "footer": "Blockhain/Web",
+            "description": "Nft.png",
+        },
+        {
+            "header": "Dex Platform",
+            "footer": "Blockhain/Web",
+            "description": "trading.png",
+        },
+        {
+            "header": "Betting Platform",
+            "footer": "Blockhain",
+            "description": "betting.png",
+        },
     ]
 
-    serviceInfo: list[dict] = [
+    serviceInfo: List[Dict[str, str]] = [
         {
             "header": "BlockChain",
             "footer": "SmartContracts, NFTs, DEFI, AUDIT",
@@ -63,13 +110,24 @@ class State(rx.State):
         },
     ]
 
-    filterWorks: str = "Filter by name"
+    filterWorksExpression: str = ""
 
-    @rx.var
-    def testFilterWorks(test):
-        # print(test)
-        # print("------")
-        return True
+    @rx.cached_var
+    def filteredWorkData(self) -> List[Dict[str, str]]:
+        return [
+            row
+            for row in self.workData
+            if not self.filterWorksExpression.lower()
+            or self.filterWorksExpression.lower() in row["header"].lower()
+            or self.filterWorksExpression.lower() in row["footer"].lower()
+        ]
 
-    def filterWorkCards():
-        pass
+    def inputWorkFilter(self, value):
+        self.filterWorksExpression = value
+        yield rx.console_log(f"Filter set to: {self.filterWorksExpression}")
+
+    def goToContact(self):
+        rx.redirect("/contact")
+
+    def goToHome(self):
+        rx.redirect("/")
