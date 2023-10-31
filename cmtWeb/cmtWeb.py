@@ -17,6 +17,7 @@ def exampleBox(color: str, width: str) -> rx.Component:
 
 
 def index() -> rx.Component:
+    # return rx.box()
     # return contactSection()
     return rx.box(
         rx.vstack(
